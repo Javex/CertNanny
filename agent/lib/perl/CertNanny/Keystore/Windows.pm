@@ -112,7 +112,7 @@ sub getcert()
 		my @certs = glob "Blob*.crt";
 		my $active_cert;
 		foreach my $certfilename (@certs) {
-			my $certinfo = $self->getcertinfo( CERTFILE => $certfilename );
+			my $certinfo = CertNanny::Util->getcertinfo( CERTFILE => $certfilename );
 			CertNanny::Logging->debug("Parsing certificate with filname $certfilename and subjectname $certinfo->{SubjectName}");
 			my $notbefore = CertNanny::Util::isodatetoepoch($certinfo->{NotBefore});
 			my $notafter = CertNanny::Util::isodatetoepoch($certinfo->{NotAfter});
@@ -318,7 +318,7 @@ sub getStoreCerts() {
 	my @certs = glob "Blob*.crt";
 	my @certinfos;
 	foreach my $cert (@certs) {
-		my $certinfo = $self->getcertinfo( CERTFILE => $cert );
+		my $certinfo = CertNanny::Util->getcertinfo( CERTFILE => $cert );
 		push(@certinfos, $certinfo);
 	}
 	chdir $olddir;
